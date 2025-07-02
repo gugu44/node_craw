@@ -23,6 +23,10 @@ app.post("/crawl", async (req, res) => {
       } else if (type === "tmall") {
         const el = document.querySelector('.tb-picks-container');
         return el ? el.innerHTML : null;
+      } else if (type === "coupang") {
+        // 쿠팡 상품상세: body 내 모든 이미지 src만 배열로 반환
+        const imgs = Array.from(document.body.querySelectorAll('img'));
+        return imgs.map(img => img.src);
       } else {
         return null;
       }

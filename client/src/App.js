@@ -49,6 +49,16 @@ function App() {
             />
             Tmall
           </label>
+          <label style={{ marginLeft: 16 }}>
+            <input
+              type="radio"
+              name="type"
+              value="coupang"
+              checked={type === "coupang"}
+              onChange={() => setType("coupang")}
+            />
+            쿠팡 상품상세
+          </label>
         </div>
         <input
           value={url}
