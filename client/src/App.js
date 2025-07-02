@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 function App() {
   const [url, setUrl] = useState("");
+  const [type, setType] = useState("naver");
   const [result, setResult] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -13,7 +14,7 @@ function App() {
       const res = await fetch("http://localhost:3001/crawl", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ url }),
+        body: JSON.stringify({ url, type }),
       });
       const data = await res.json();
       setResult(data.content || data.error);
@@ -27,6 +28,28 @@ function App() {
     <div style={{ maxWidth: 600, margin: "40px auto", fontFamily: "sans-serif" }}>
       <h2>URL 크롤러</h2>
       <form onSubmit={handleSubmit} style={{ marginBottom: 20 }}>
+        <div style={{ marginBottom: 10 }}>
+          <label>
+            <input
+              type="radio"
+              name="type"
+              value="naver"
+              checked={type === "naver"}
+              onChange={() => setType("naver")}
+            />
+            네이버 상품상세
+          </label>
+          <label style={{ marginLeft: 16 }}>
+            <input
+              type="radio"
+              name="type"
+              value="tmall"
+              checked={type === "tmall"}
+              onChange={() => setType("tmall")}
+            />
+            Tmall
+          </label>
+        </div>
         <input
           value={url}
           onChange={e => setUrl(e.target.value)}
